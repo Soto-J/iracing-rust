@@ -1,7 +1,18 @@
-use data::fetch_ircaing_data;
-
+use data::IracingClient;
 mod data;
 
-fn main() {
-    let response = fetch_ircaing_data();
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let client = IracingClient::new().await?;
+
+    println!("");
+
+    client.get_iracing_data().await?;
+
+    Ok(())
 }
+
+// Blocking
+// fn main() {
+//     let body = blocking_get().unwrap();
+// }
